@@ -1,0 +1,5 @@
+﻿  secure.cpp
+  main.cpp
+  Создание кода...
+C:\Git\Login\login\secure\secure.cpp(70): warning C4715: Prov::ror: значение возвращается не при всех путях выполнения
+  login.vcxproj -> C:\Git\Login\x64\Debug\login.exe
