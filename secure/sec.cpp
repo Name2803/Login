@@ -1,7 +1,7 @@
 #include "sec.h"
 
 
-int secu(const std::string& outLog, const std::string& outPass)
+std::string secu(const std::string& outLog, const std::string& outPass)
 {
 	setlocale(LC_ALL, "RU");
 	const std::string path = "../secure/001.txt";
@@ -40,8 +40,7 @@ int secu(const std::string& outLog, const std::string& outPass)
 			if (inPass[sizeof(inPass) / 8 - 2] == outPass[sizeof(outPass) / 8 - 2])
 			{
 				std::cout << "проверка пройдена\n";
-				server(ID);
-				return 0;
+				return ID;
 			}
 		}
 

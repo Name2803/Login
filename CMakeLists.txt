@@ -11,6 +11,7 @@ add_executable(${PROJECT_NAME}
 	secure/001.txt
 	server/server.h
 	server/server.cpp
+	server/data.txt
 )
 
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)

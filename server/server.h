@@ -3,4 +3,4 @@
 #include <fstream>
 #define DEBUG
 
-void server(const std::string ID);
+void server(const std::string outID);
