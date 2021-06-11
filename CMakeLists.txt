@@ -8,6 +8,9 @@ add_executable(${PROJECT_NAME}
 	src/main.cpp
 	secure/sec.h
 	secure/sec.cpp
+	secure/001.txt
+	server/server.h
+	server/server.cpp
 )
 
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)

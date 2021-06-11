@@ -15,11 +15,10 @@ int main()
 	struct data_1 a;
 	
 	
-	std::cout << "skhgks";
-	
 	std::cout << "¬водите логин и пароль:\n";
 	std::cin >> a.log;
 	std::cin >> a.pass;
+
 
 	secu(a.log, a.pass);
 	return 0;
