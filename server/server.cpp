@@ -2,7 +2,7 @@
 
 void server(const std::string outID)
 {
-	const std::string path = "data.txt";
+	const std::string path = "../server/data.txt";
 	std::string inID;
 	std::string fName;
 	std::string lName;
