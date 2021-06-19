@@ -26,6 +26,7 @@ struct data_2
 
 int reg();
 void zap();
+void id();
 	
 struct data_2 b;
 const std::string path = "../secure/001.txt";
@@ -73,13 +74,13 @@ int reg()
 
 	std::cout << "Придумайте логин: ";
 	std::cin >> b.log;
-	tempi2 = sizeof(b.log);
+	tempi2 = sizeof(b.log) / 8;
 	fin.open(path);
 	while (!fin.eof())
 	{
 		fin >> temp;
 
-		tempi1 = sizeof(temp);
+		tempi1 = sizeof(temp) / 8;
 
 		if (tempi2 != tempi1)
 		{
@@ -109,13 +110,14 @@ int reg()
 
 void zap()
 {
+	int ID;
 	std::string temp1;
 	int prov = 0;
 
 	std::ofstream fout;
 
 	fout.open(path, std::ofstream::app);
-
+	ID = ++id();
 	fout << b.log << " ";
 	
 
@@ -126,11 +128,11 @@ void zap()
 	{
 		std::cout << "подтвердите пароль:\n";
 		std::cin >> temp1;
-		if (sizeof(b.pass) != sizeof(temp1))
+		if (sizeof(b.pass) / 8 != sizeof(temp1) / 8)
 			prov = 0;
 		else
 		{
-			for (int i = 0; i < sizeof(b.pass) - 1; i++)
+			for (int i = 0; i < sizeof(b.pass) / 8 - 1; i++)
 			{
 				if (b.pass[i] != temp1[i])
 				{
@@ -139,10 +141,11 @@ void zap()
 					break;
 				}
 
-				if (b.pass[sizeof(b.pass) - 2] == temp1[sizeof(b.pass) - 2])
+				if (b.pass[sizeof(b.pass) / 8 - 2] == temp1[sizeof(b.pass) / 8 - 2])
 				{
 					std::cout << "Пароль потвержден\n";
 
+					fout << b.pass << " " << ID << "\n";
 
 					return;
 				}
@@ -153,4 +156,23 @@ void zap()
 
 
 	fout.close();
+}
+
+int id()
+{
+	std::string temp;
+	int lastId;
+
+	std::ifstream fin;
+	fin.open(path);
+	while (!fin.eof())
+		fin >> temp >> temp >> lastId;
+
+#ifdef DEBUG
+	std::cout << lastId;
+#endif // DEBUG
+
+
+	fin.close();
+	return lastId;
 }
