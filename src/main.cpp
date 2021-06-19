@@ -24,17 +24,16 @@ struct data_2
 	std::string ID;
 };
 
+int reg();
+void zap();
+	
+struct data_2 b;
+const std::string path = "../secure/001.txt";
+
 int main()
 {
 	setlocale(LC_ALL, "RU");
 	struct data_1 a;
-	struct data_2 b;
-	std::string temp;
-	const std::string path = "../secure/001.txt";
-	std::ifstream fin;
-	int tempi = 0;
-	int tempi1 = 0;
-	int tempi2 = 0;
 
 
 	
@@ -50,6 +49,27 @@ int main()
 	std::cin >> b.sex;
 	std::cout << "Прочее: ";
 	std::cin >> b.other;
+	while (reg() != 0);
+		
+
+	/*std::cout << "Вводите логин и пароль:\n";
+	std::cin >> a.log;
+	std::cin >> a.pass;
+
+
+	secu(a.log, a.pass);*/
+
+	return 0;
+}
+
+
+int reg()
+{
+	std::string temp;
+	std::ifstream fin;
+	int tempi = 0;
+	int tempi1 = 0;
+	int tempi2 = 0;
 
 	std::cout << "Придумайте логин: ";
 	std::cin >> b.log;
@@ -75,21 +95,62 @@ int main()
 			{
 #ifdef DEBUG
 				std::cout << "pravilno\n";
+
 #endif // DEBUG
+				zap();
 				return 0;
 			}
 		}
 	}
-	std::cout << "login uje sushestvuet\n";
 	fin.close();
+	std::cout << "login uje sushestvuet\n";
+	return 1;
+}
+
+void zap()
+{
+	std::string temp1;
+	int prov = 0;
+
+	std::ofstream fout;
+
+	fout.open(path, std::ofstream::app);
+
+	fout << b.log << " ";
+	
+
+	std::cout << "Введите пароль:\n";
+	std::cin >> b.pass;
+
+	while (prov != 1)
+	{
+		std::cout << "подтвердите пароль:\n";
+		std::cin >> temp1;
+		if (sizeof(b.pass) != sizeof(temp1))
+			prov = 0;
+		else
+		{
+			for (int i = 0; i < sizeof(b.pass) - 1; i++)
+			{
+				if (b.pass[i] != temp1[i])
+				{
+					std::cout << "неправильный пароль!\nПовторите попытку\n";
+					prov = 0;
+					break;
+				}
+
+				if (b.pass[sizeof(b.pass) - 2] == temp1[sizeof(b.pass) - 2])
+				{
+					std::cout << "Пароль потвержден\n";
 
 
-	/*std::cout << "Вводите логин и пароль:\n";
-	std::cin >> a.log;
-	std::cin >> a.pass;
+					return;
+				}
+			}
+		}
+	}
 
 
-	secu(a.log, a.pass);*/
 
-	return 0;
+	fout.close();
 }
