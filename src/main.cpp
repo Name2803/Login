@@ -26,40 +26,50 @@ struct data_2
 
 int reg();
 void zap();
-void id();
+int id();
 	
 struct data_2 b;
 const std::string path = "../secure/001.txt";
 
 int main()
 {
+	int laba;
 	setlocale(LC_ALL, "RU");
 	struct data_1 a;
 
 
 	
-	
-	std::cout << "Регистрация:\n";
-	std::cout << "имя: ";
-	std::cin >> b.fname;
-	std::cout << "Фамилия: ";
-	std::cin >> b.lname;
-	std::cout << "Год: ";
-	std::cin >> b.year;
-	std::cout << "Пол: ";
-	std::cin >> b.sex;
-	std::cout << "Прочее: ";
-	std::cin >> b.other;
-	while (reg() != 0);
+	std::cout << "Выберите путь:\n"
+		<< "1. Регистрация\n"
+		<< "2. Логин\n";
+	std::cin >> laba;
+
+	if (laba == 1)
+	{
+		std::cout << "Регистрация:\n";
+		std::cout << "имя: ";
+		std::cin >> b.fname;
+		std::cout << "Фамилия: ";
+		std::cin >> b.lname;
+		std::cout << "Год: ";
+		std::cin >> b.year;
+		std::cout << "Пол: ";
+		std::cin >> b.sex;
+		std::cout << "Прочее: ";
+		std::cin >> b.other;
+		while (reg() != 0);
+	}
 		
 
-	/*std::cout << "Вводите логин и пароль:\n";
-	std::cin >> a.log;
-	std::cin >> a.pass;
+	else if (laba == 2)
+	{
+		std::cout << "Вводите логин и пароль:\n";
+		std::cin >> a.log;
+		std::cin >> a.pass;
 
 
-	secu(a.log, a.pass);*/
-
+		secu(a.log, a.pass);
+	}
 	return 0;
 }
 
@@ -90,7 +100,7 @@ int reg()
 			return 0;
 		}
 
-		for (int i = 0; i < tempi1; i++)
+		for (int i = 0; i < tempi1 - 1; i++)
 		{
 			if (b.log[i] != temp[i])
 			{
@@ -117,7 +127,7 @@ void zap()
 	std::ofstream fout;
 
 	fout.open(path, std::ofstream::app);
-	ID = ++id();
+	ID = id(); ID++;
 	fout << b.log << " ";
 	
 
@@ -146,6 +156,7 @@ void zap()
 					std::cout << "Пароль потвержден\n";
 
 					fout << b.pass << " " << ID << "\n";
+					zapSer(ID, b.fname, b.lname, b.year, b.sex, b.other);
 
 					return;
 				}
@@ -156,6 +167,7 @@ void zap()
 
 
 	fout.close();
+
 }
 
 int id()

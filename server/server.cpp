@@ -1,8 +1,10 @@
 #include"server.h"
 
+const std::string path = "../server/data.txt";
+
 void server(const std::string outID)
 {
-	const std::string path = "../server/data.txt";
+	setlocale(LC_ALL, "RU");
 	std::string inID;
 	std::string fName;
 	std::string lName;
@@ -30,4 +32,14 @@ void server(const std::string outID)
 			<< other;
 	}
 	fin.close();
+}
+
+
+void zapSer(const int ouyID, const std::string outFn, const std::string outLn, const std::string outY, const std::string outS, const std::string outO)
+{
+	setlocale(LC_ALL, "RU");
+	std::ofstream fout;
+	fout.open(path, std::ofstream::app);
+	fout << ouyID << " " << outFn << " " << outLn << " " << outY << " " << outS << " " << outO << "\n";
+	fout.close();
 }

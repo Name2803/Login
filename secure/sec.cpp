@@ -42,6 +42,7 @@ void secu(const std::string& outLog, const std::string& outPass)
 			{
 				std::cout << "проверка пройдена\n";
 				server(ID);
+				return;
 			}
 		}
 
